@@ -1,11 +1,39 @@
 import React, { useState } from 'react';
 
-// Use direct path strings from the public folder:
-const logoImg = "/assets/logo.jpeg";
+// --- INLINE VECTOR LOGO COMPONENT ---
+// Ensures logo is always visible even if local image paths are missing or broken
+function MayaLogo({ className = "h-12" }) {
+  return (
+    <div className={`flex items-center gap-3 ${className}`}>
+      {/* Dynamic Vector Icon matching the MF Eagle mark */}
+      <div className="relative w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center p-2 text-white shadow-sm shrink-0">
+        <svg viewBox="0 0 100 100" fill="currentColor" className="w-full h-full">
+          {/* M & F Typography Base */}
+          <text x="5" y="75" fontFamily="serif" fontWeight="900" fontSize="70" fill="currentColor">M</text>
+          <text x="50" y="75" fontFamily="serif" fontWeight="900" fontSize="70" fill="currentColor">F</text>
+          {/* Eagle Silhouette Motif */}
+          <path d="M 35,45 Q 55,20 80,42 Q 65,55 50,48 Q 40,60 30,50 Z" fill="#ffffff" />
+          <circle cx="68" cy="36" r="3" fill="#0f172a" />
+        </svg>
+      </div>
 
+      {/* Brand Text */}
+      <div className="flex flex-col justify-center">
+        <span className="text-lg sm:text-xl font-black tracking-tight text-slate-900 leading-none uppercase font-serif">
+          MAYA FOOTWEAR
+        </span>
+        <span className="text-[9px] sm:text-[10px] uppercase font-bold tracking-widest text-slate-500 mt-1">
+          STEP WITH EVERY STYLE
+        </span>
+      </div>
+    </div>
+  );
+}
+
+// --- PRODUCT CATALOG ---
 const PRODUCTS = [
   {
-    id: 1,
+     id: 1,
     name: "Adidas Samba 'Valentine' Heart Edition",
     category: "Sneakers",
     price: 4500,
@@ -138,6 +166,7 @@ const PRODUCTS = [
   },
 ];
 
+
 export default function App() {
   const [cart, setCart] = useState([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
@@ -146,7 +175,6 @@ export default function App() {
 
   const categories = ["All", "Sneakers", "Ballet Flats", "Sandals & Slides"];
 
-  // Filter products based on search input and selected category
   const filteredProducts = PRODUCTS.filter((product) => {
     const matchesCategory = selectedCategory === "All" || product.category === selectedCategory;
     const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -193,32 +221,14 @@ export default function App() {
       </div>
 
       {/* Header / Navbar */}
-      <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           
-          {/* Logo & Brand Name */}
-          <div className="flex items-center gap-3">
-            <img 
-              src={logoImg} 
-              alt="Maya Footwear Logo" 
-              className="h-12 w-auto object-contain rounded"
-              onError={(e) => {
-                e.target.onerror = null; 
-                e.target.style.display = 'none';
-              }}
-            />
-            <div className="block">
-              <span className="text-lg sm:text-xl font-black tracking-tight text-slate-900 block leading-none uppercase">
-                MAYA FOOTWEAR
-              </span>
-              <span className="text-[10px] uppercase font-bold tracking-widest text-slate-500">
-                Step With Every Style
-              </span>
-            </div>
-          </div>
+          {/* Always Visible Logo */}
+          <MayaLogo />
 
           {/* Search Bar */}
-          <div className="flex-1 max-w-md mx-2 sm:mx-4">
+          <div className="flex-1 max-w-md mx-2 sm:mx-4 hidden sm:block">
             <div className="relative">
               <input
                 type="text"
@@ -233,7 +243,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Cart Trigger Button */}
+          {/* Cart Trigger */}
           <button
             onClick={() => setIsCartOpen(true)}
             className="relative p-2.5 text-slate-800 hover:bg-slate-100 rounded-full transition-colors flex items-center gap-2"
@@ -257,7 +267,7 @@ export default function App() {
           <span className="px-3 py-1 text-xs font-bold uppercase tracking-widest text-amber-800 bg-amber-100 rounded-full inline-block mb-3">
             New Season Collection
           </span>
-          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 uppercase tracking-tight leading-tight">
+          <h1 className="text-3xl sm:text-5xl font-black text-slate-900 uppercase tracking-tight leading-tight font-serif">
             STEP WITH EVERY STYLE
           </h1>
           <p className="mt-3 text-slate-600 text-base sm:text-lg">
@@ -301,12 +311,15 @@ export default function App() {
                 key={product.id}
                 className="group bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col"
               >
-                {/* Image Display */}
                 <div className="relative aspect-square bg-slate-100 overflow-hidden">
                   <img
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    onError={(e) => {
+                      // Fallback image placeholder if image file is missing locally
+                      e.target.src = "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=800";
+                    }}
                   />
                   {product.badge && (
                     <span className="absolute top-3 left-3 bg-slate-900/90 text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md backdrop-blur-sm">
@@ -315,7 +328,6 @@ export default function App() {
                   )}
                 </div>
 
-                {/* Details */}
                 <div className="p-5 flex-1 flex flex-col justify-between">
                   <div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700">
@@ -335,7 +347,6 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Price & Action */}
                   <div className="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between">
                     <div>
                       <span className="text-xs text-slate-400 block font-medium">Price</span>
@@ -422,7 +433,7 @@ export default function App() {
       <footer className="bg-slate-900 text-white border-t border-slate-800 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left grid grid-cols-1 sm:grid-cols-3 gap-8">
           <div>
-            <span className="text-lg font-black tracking-tight block">MAYA FOOTWEAR</span>
+            <MayaLogo className="text-white mb-4" />
             <p className="text-xs text-slate-400 mt-2">Step With Every Style. Premium footwear curated for elegance and everyday durability.</p>
           </div>
           <div>
@@ -430,7 +441,7 @@ export default function App() {
             <ul className="text-xs space-y-2 text-slate-400">
               <li>Instagram: <a href="https://instagram.com/mayafootwear254" target="_blank" rel="noreferrer" className="hover:text-white underline">@mayafootwear254</a></li>
               <li>Facebook: <a href="https://facebook.com/mayafootwear254" target="_blank" rel="noreferrer" className="hover:text-white underline">mayafootwear254</a></li>
-               <li>tiktok: <a href="https://www.tiktok.com/@mayafootwear254" target="_blank" rel="noreferrer" className="hover:text-white underline">@mayafootwear254</a></li>
+              <li>TikTok: <a href="https://tiktok.com/@mayafootwear254" target="_blank" rel="noreferrer" className="hover:text-white underline">@mayafootwear254</a></li>
               <li>Phone / WhatsApp: <a href="tel:+254112907594" className="hover:text-white underline">+254 112 907 594</a></li>
             </ul>
           </div>
