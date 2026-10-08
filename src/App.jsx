@@ -98,8 +98,30 @@ const PRODUCTS = [
     badge: "Must Have",
     description: "Elegantly designed wide-strap suede sandals with sculptural gold toe accents."
   },
-  { 
+  {
     id: 7,
+    name: "Zara sling back sandals slim heel",
+    category: "Sandals & Slides",
+    price: 3200,
+    rating: 4.6,
+    reviews: 15,
+    image: "  https://i.postimg.cc/BZ19Py0d/Leilaa-Dinar.jpg",
+    badge: "Must Have",
+    description: "Elegantly designed wide-strap suede sandals with sculptural gold toe accents."
+  },
+  {
+    id: 8,
+    name: "Zara Metallic Gold Strappy Sandals",
+    category: "Sandals & Slides",
+    price: 3500,
+    rating: 4.7,
+    reviews: 18,
+    image: "https://i.postimg.cc/qM2vdqZf/Luxury-Gold-Flat-Sandals-Women-Summer-Hollow-Design-Gladiator-Sandals-Comfortable-Ankle-Strap-Casual.jpg",
+    badge: "Trending",
+    description: "Chic metallic gold strappy sandals with a slim heel, perfect for evening wear."
+  },
+  { 
+    id: 9,
     name: "Nike Mind 001 Slide",
     category: "Sandals & Slides",
     price: 3000,
@@ -110,7 +132,7 @@ const PRODUCTS = [
     description: "Comfortable and stylish slide with a cushioned footbed and sleek design." 
   },
   {
-    id: 7,
+    id: 10,
     name: "Nike Dunk Low “Medium Olive”",
     category: "Sneakers",
     price: 6500,
@@ -121,7 +143,7 @@ const PRODUCTS = [
     description: "Classic Dunk Low silhouette in a versatile olive colorway with premium leather."
   },
   {
-    id: 8,
+    id: 11,
     name: "Pink teddy-bear slippers",
     category: "Sandals & Slides",
     price: 2500,
@@ -132,7 +154,7 @@ const PRODUCTS = [
     description: "Soft and plush teddy-bear slippers perfect for lounging at home."
   },
   {
-    id: 9,
+    id: 12,
     name: "Puma Suede XL red",
     category: "Sneakers",
     price: 4000,
@@ -143,7 +165,7 @@ const PRODUCTS = [
     description: "Iconic Puma Suede XL in a bold red colorway with premium suede upper."
   },
   {
-    id: 10,
+    id: 13,
     name: "Puma Suede XL black",
     category: "Sneakers",
     price: 4000,
@@ -154,7 +176,7 @@ const PRODUCTS = [
     description: "Timeless Puma Suede XL in sleek black with a durable rubber sole."
   },
   {
-    id: 11,
+    id: 14,
     name: "New Balance 9060",
     category: "Sneakers",
     price: 6000,
@@ -163,6 +185,17 @@ const PRODUCTS = [
     image: "https://i.postimg.cc/pLJpT1bk/Whats-App-Image-2026-09-26-at-16-53-09.jpg",
     badge: "New Arrival",
     description: "Modern New Balance 9060 with a chunky sole and premium materials."
+  },
+  {
+    id: 15,
+    name:"samba classic",
+    category: "Sneakers",
+    price: 4500,
+    rating: 4.8,
+    reviews: 30,
+    image: "https://i.postimg.cc/prZcDDLm/Adidas-Men-s-Samba-Classic-Soccer-Shoe.jpg",
+    badge: "Bestseller",
+    description: "Classic Adidas Samba with a timeless design and comfortable fit."
   },
 ];
 
